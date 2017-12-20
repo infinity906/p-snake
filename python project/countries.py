@@ -1,6 +1,6 @@
-print("Welcome")
-def countries():
-    list_of_countries = {
+import infinity as i
+
+list_of_countries = {
         1 : {
             'name': 'Canada',
             'location': 'North America',
@@ -50,6 +50,12 @@ def countries():
             'area': '357,022 square km'
         }
     }
+
+def countries():
+    print("Welcome to Statistics module of Inifinity\n"
+          "This module can provide you various information like Population, location, Capital City, Currency, Area, etc of all the countries in the globe\n"
+          "Kindly follow the below instructions for getting the precise information.\n")
+    global list_of_countries
     search = input('Please enter your query\n')
     search1 = search.split()
     if search.lower() == 'population':
@@ -91,4 +97,11 @@ def countries():
             print("Sorry, the information is not present in the database.")
             countries()
 
-countries()
+    retry = input('''
+                    Do you want to use the statistics module again ?
+                    Y or N. ''')
+
+    if retry.upper() == 'Y':
+        i.mode(option="statistics")
+    else:
+        return "Thank you for using statistics module in Inifinity", i.main()
