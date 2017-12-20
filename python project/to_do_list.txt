@@ -1,0 +1,8 @@
+task 1:
+What is compund calculation
+
+
+
+python codes:
+
+http://comp2152.gblearn.com/2017/fall/
