@@ -25,8 +25,14 @@ def mode(option):
               "Kindly follow the below mentioned instructions for the required result\n")
         mathematics()
     elif option.lower() == "weather":
+        print("Welcome to weather module of infinity\n"
+              "This module can assist you in informing about the current as well as the predict the future weather conditions\n"
+              "Kindly follow the below mentioned instructions for the accurate weather conditions\n")
         weather()
     elif option.lower() == "statistics":
+        print("Welcome to Statistics module of Inifinity\n"
+              "This module can provide you various information like Population, location, Capital City, Currency, Area, etc of all the countries in the globe\n"
+              "Kindly follow the below instructions for getting the precise information.\n")
         countries()
     elif option.lower() == "exit":
         print("Thank you for using Inifinity Assistance System")
@@ -186,9 +192,7 @@ list_of_countries = {
     }
 
 def countries():
-    print("Welcome to Statistics module of Inifinity\n"
-          "This module can provide you various information like Population, location, Capital City, Currency, Area, etc of all the countries in the globe\n"
-          "Kindly follow the below instructions for getting the precise information.\n")
+
     global list_of_countries
     search = input('Please enter your query\n')
     search1 = search.split()
@@ -214,84 +218,97 @@ def countries():
 
     else:
         try:
+            #question should be eg: "population of canada"
             country = search1[2]
             specific = search1[0]
 
             for i in range (1,7):
                 if country.lower() == list_of_countries[i]['name'].lower():
                     print(specific, "of", country, "is", list_of_countries[i][specific] )
-                    countries()
+                    break
                 elif (country.lower() != list_of_countries[i]['name'].lower()) and (i == 6) :
-                    print("Sorry, the information is not present in the database.")
+                    print("Sorry, thelllllllll information is not present in the database.")
                     countries()
         except IndexError:
             print("Please enter a valid query.")
             countries()
         except KeyError:
-            print("Sorry, the information is not present in the database.")
+            print("Sorry, thekkkkkk information is not present in the database.")
             countries()
 
-        return retrying("statistics")
+    return retrying("countries")
 
 
 def weatherlib(date):
     if date.lower() == 'january':
         num = list(range(-12, 10))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # January = print("-4.6 degree celcius")
     elif date.lower() == 'february':
         num = list(range(-11, -9))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # february = print("-4.0 degree celcius")
     elif date.lower() == 'march':
         num = list(range(8, 13))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # March = print("10 degree celcius")
     elif date.lower() == 'april':
         num = list(range(9, 16))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # April = print("12 degree celcius")
     elif date.lower() == 'may':
         num = list(range(11, 18))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # May = print("20 degree celcius")
     elif date.lower() == 'june':
         num = list(range(10, 17))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # June = print("22 degree celcius")
     elif date.lower() == 'july':
         num = list(range(20, 28))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # July = print("33 degree celcius")
     elif date.lower() == 'august':
         num = list(range(21, 25))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # August = print("38 degree celcius")
     elif date.lower() == 'september':
         num = list(range(5, 10))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # Spetember = print("18 degree celcius")
     elif date.lower() == 'october':
         num = list(range(5, 8))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # October = print("13 degree celcius")
     elif date.lower() == 'november':
         num = list(range(-8, -5))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # Novenber = print("4 degree celcius")
     elif date.lower() == 'december':
         num = list(range(-10, -6))
         temp = random.choice(num)
+        temp1 = temp * 1.8 + 32
         # December = print("-3 degree celcius")
+    else:
+        print ("Please enter a valid month")
 
-    return temp
+    return temp, temp1
 
 
 def weather ():
     now = datetime.datetime.now()
-    print("Welcome to weather module of infinity\n"
-          "This module can assist you in informing about the current as well as the predict the future weather conditions\n"
-          "Kindly follow the below mentioned instructions for the accurate weather conditions\n")
+
 
     query = input("Enter your query\n")
 
@@ -299,15 +316,15 @@ def weather ():
 
         # print (now.strftime("%B"))
         date = (now.strftime("%B"))
-        temp = weatherlib(date)
-        print("Weather in toronto now is ", temp, "Degree Celsius,", temp * 1.8 + 32, "Degree Fahrenheit")
+        temp, temp1 = weatherlib(date)
+        print("Weather in toronto now is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
     else:
         qlist = query.split()
         date = qlist[5]
         temp = weatherlib(date)
-        print("Weather in toronto in", date," is ", temp, "Degree Celsius,", temp * 1.8 + 32, "Degree Fahrenheit")
+        print("Weather in toronto in", date," is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
     return retrying("weather")
-        
+
 
 def retrying (mode1):
     retry = input('''
@@ -315,7 +332,8 @@ def retrying (mode1):
                     Y or N. \n''')
 
     if retry.upper() == 'Y':
-        mode(option=mode1)
+        function = globals()[mode1]
+        function()
     else:
         print("Thankyou for using ", mode1, "module in Inifinity")
         return main()
