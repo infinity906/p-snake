@@ -9,7 +9,7 @@ def main():
           "3. Can be used for knowing various statistics of various countries\n")
 
     option = input("Kindly select the required service from the below mentioned list\n"
-                   "Math = Mathematical Calculator\n"
+                   "Mathematics = Mathematical Calculator\n"
                    "Weather = Get the updated weather conditions\n"
                    "Statistics = Get the updated statistics on any country of your choice\n"
                    "Exit = To exit from Inifinity Assistance System\n")
@@ -20,9 +20,10 @@ def main():
 def mode(option):
 
     if option.lower() == "mathematics":
-        num1 = input('Please enter the first number\n')
-        num2 = input("Please enter the second number\n")
-        mathematics(num1, num2)
+        print("Welcome to Mathematics module of infinity\n"
+              "this module can assist you in various mathematical functions like addition, subtraction, multiplication and many more on any number that you provide\n"
+              "Kindly follow the below mentioned instructions for the required result\n")
+        mathematics()
     elif option.lower() == "weather":
         weather()
     elif option.lower() == "statistics":
@@ -34,9 +35,6 @@ def mode(option):
 
 
 def validateNumber(number):
-    print("Welcome to Mathematics module of infinity\n"
-          "this module can assist you in various mathematical functions like addition, subtraction, multiplication and many more on any number that you provide\n"
-          "Kindly follow the below mentioned instructions for the required result\n")
     try:
         value = float(number)
         return True
@@ -44,12 +42,14 @@ def validateNumber(number):
         return False
 
 
-def mathematics(num1, num2):
-    if validateNumber(num1):
-        num1 = float(num1)
-        if validateNumber(num2):
-            num2 = float(num2)
 
+def mathematics():
+    num1 = input('Please enter the first number\n')
+    if validateNumber(num1):
+#to check if the number is float
+        num1 = float(num1)
+
+        while True:
             operation = input('''
                         Please type in the math operation you would like to complete:
                         + for addition
@@ -61,32 +61,73 @@ def mathematics(num1, num2):
                         ''')
 
             if operation == '+':
-                print(num1, "+", num2, "=", num1 + num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 + num2
 
             elif operation == '-':
-                print(num1, "-", num2, "=", num1 - num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 - num2
 
             elif operation == '*':
-                print(num1, "*", num2, "=", num1 * num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 * num2
 
             elif operation == '/':
-                print(num1, "/", num2, "=", num1 / num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 / num2
 
             elif operation == '%':
-                print(num1, "%", num2, "=", num1 % num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 % num2
 
             elif operation == '^':
-                print(num1, "^", num2, "=", num1 ** num2)
+                num2 = input("Please enter the second number\n")
+                if validateNumber(num2):
+                    num2 = float(num2)
+                else:
+                    print("You have entered an invalid character2. Please enter any numerical value for the calculation")
+                    mathematics()
+                result = num1 ^ num2
 
             else:
                 print("You have not typed a valid operator, please run the program again.")
-                calculator()
-        else:
-            print("You have entered an invalid character2. Please enter any numerical value for the calculation")
-            calculator()
+                continue
+            print (result)
+            answer = input("Continue calculation ? y/n\n")
+            if answer.lower() == "n" or answer.lower()=="no":
+                break
+            else :
+                num1 = result
+                print (num1)
+
     else:
         print("You have entered an invalid character1. Please enter any numerical value for the calculation")
-        calculator()
+        mathematics()
 
     return retrying("mathematics")
 
@@ -265,11 +306,13 @@ def weather ():
         date = qlist[5]
         temp = weatherlib(date)
         print("Weather in toronto in", date," is ", temp, "Degree Celsius,", temp * 1.8 + 32, "Degree Fahrenheit")
+    return retrying("weather")
+        
 
 def retrying (mode1):
     retry = input('''
                     Do you want to use this module again ?
-                    Y or N. ''')
+                    Y or N. \n''')
 
     if retry.upper() == 'Y':
         mode(option=mode1)
