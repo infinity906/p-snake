@@ -227,13 +227,13 @@ def countries():
                     print(specific, "of", country, "is", list_of_countries[i][specific] )
                     break
                 elif (country.lower() != list_of_countries[i]['name'].lower()) and (i == 6) :
-                    print("Sorry, thelllllllll information is not present in the database.")
+                    print("Sorry, the information is not present in the database.")
                     countries()
-        except IndexError:
+        except Exception:
             print("Please enter a valid query.")
             countries()
         except KeyError:
-            print("Sorry, thekkkkkk information is not present in the database.")
+            print("Sorry, the information is not present in the database.")
             countries()
 
     return retrying("countries")
@@ -301,28 +301,33 @@ def weatherlib(date):
         temp1 = temp * 1.8 + 32
         # December = print("-3 degree celcius")
     else:
-        print ("Please enter a valid month")
-
+        temp = 0
+        temp1 = 0
+        print ("Please enter a valid query")
     return temp, temp1
 
 
 def weather ():
     now = datetime.datetime.now()
-
-
     query = input("Enter your query\n")
-
-    if query.lower() == 'what is the weather':
-
-        # print (now.strftime("%B"))
-        date = (now.strftime("%B"))
-        temp, temp1 = weatherlib(date)
-        print("Weather in toronto now is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
-    else:
-        qlist = query.split()
-        date = qlist[5]
-        temp = weatherlib(date)
-        print("Weather in toronto in", date," is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
+    try:
+        if query.lower() == 'what is the weather':
+            # print (now.strftime("%B"))
+            date = (now.strftime("%B"))
+            temp, temp1 = weatherlib(date)
+            print("Weather in toronto now is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
+        else:
+            qlist = query.split()
+            date = qlist[5]
+            temp, temp1 = weatherlib(date)
+            if temp != 0 and temp1 != 0:
+                print("Weather in toronto in", date," is ", temp, "Degree Celsius,", temp1, "Degree Fahrenheit")
+    except Exception:
+        print("Please enter a valid query.")
+        weather()
+    except KeyError:
+        print("Sorry, the information is not present in the database.")
+        weather()
     return retrying("weather")
 
 

@@ -1,4 +1,4 @@
-from msvcrt import getch
+import infinity123 as i
 
 def validateNumber(number):
     try:
@@ -9,12 +9,10 @@ def validateNumber(number):
 
 
 
-def mathematics(num1):
-    print("Welcome to Mathematics module of infinity\n"
-          "this module can assist you in various mathematical functions like addition, subtraction, multiplication and many more on any number that you provide\n"
-          "Kindly follow the below mentioned instructions for the required result\n")
+def mathematics():
+    num1 = input('Please enter the first number\n')
     if validateNumber(num1):
-
+#to check if the number is float
         num1 = float(num1)
 
         while True:
@@ -84,9 +82,9 @@ def mathematics(num1):
 
             else:
                 print("You have not typed a valid operator, please run the program again.")
-                mathematics()
+                continue
             print (result)
-            answer = input("Continue calculation ? y/n")
+            answer = input("Continue calculation ? y/n\n")
             if answer.lower() == "n" or answer.lower()=="no":
                 break
             else :
@@ -96,3 +94,13 @@ def mathematics(num1):
     else:
         print("You have entered an invalid character1. Please enter any numerical value for the calculation")
         mathematics()
+
+    retry = input('''
+                    Do you want to use this module again ?
+                    Y or N. \n''')
+
+    if retry.upper() == 'Y':
+        mathematics()
+    else:
+        print("Thankyou for using mathematics module in Inifinity")
+        return i.main()

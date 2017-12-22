@@ -1,4 +1,4 @@
-import infinity as i
+import infinity123 as r
 
 list_of_countries = {
         1 : {
@@ -52,9 +52,7 @@ list_of_countries = {
     }
 
 def countries():
-    print("Welcome to Statistics module of Inifinity\n"
-          "This module can provide you various information like Population, location, Capital City, Currency, Area, etc of all the countries in the globe\n"
-          "Kindly follow the below instructions for getting the precise information.\n")
+
     global list_of_countries
     search = input('Please enter your query\n')
     search1 = search.split()
@@ -80,17 +78,18 @@ def countries():
 
     else:
         try:
+            #question should be eg: "population of canada"
             country = search1[2]
             specific = search1[0]
 
             for i in range (1,7):
                 if country.lower() == list_of_countries[i]['name'].lower():
                     print(specific, "of", country, "is", list_of_countries[i][specific] )
-                    countries()
+                    break
                 elif (country.lower() != list_of_countries[i]['name'].lower()) and (i == 6) :
                     print("Sorry, the information is not present in the database.")
                     countries()
-        except IndexError:
+        except Exception:
             print("Please enter a valid query.")
             countries()
         except KeyError:
@@ -98,10 +97,11 @@ def countries():
             countries()
 
     retry = input('''
-                    Do you want to use the statistics module again ?
-                    Y or N. ''')
+                    Do you want to use this module again ?
+                    Y or N. \n''')
 
     if retry.upper() == 'Y':
-        i.mode(option="statistics")
+        countries()
     else:
-        return "Thank you for using statistics module in Inifinity", i.main()
+        print("Thankyou for using mathematics module in Inifinity")
+        return r.main()
